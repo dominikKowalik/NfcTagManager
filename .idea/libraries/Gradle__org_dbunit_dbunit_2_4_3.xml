@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.dbunit:dbunit:2.4.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.dbunit/dbunit/2.4.3/adb1288ec8b4c24e4cf71618d03e0881c90305f7/dbunit-2.4.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.dbunit/dbunit/2.4.3/95ce3d5f2b9703f0249b15f7dc5eba1c3fa40103/dbunit-2.4.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

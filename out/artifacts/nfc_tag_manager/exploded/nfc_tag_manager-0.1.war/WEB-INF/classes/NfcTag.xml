@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <NfcTag id="1" nfcUidHex="12" isAdminTag="false" groupNumber="1"   />
+    <NfcTag id="2" nfcUidHex="13" isAdminTag="false" groupNumber="1"   />
+</dataset>

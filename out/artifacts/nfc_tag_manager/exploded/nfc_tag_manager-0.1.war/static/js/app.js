@@ -1,4 +1,6 @@
 /**
  * Created by dominik on 2017-03-19.
  */
-var a = 123;
+angular.module('app',[]).controller('main',['$scope',function ($scope) {
+    $scope.name = 'bbb';
+}])
