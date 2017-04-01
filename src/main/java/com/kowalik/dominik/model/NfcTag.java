@@ -11,14 +11,14 @@ import javax.persistence.*;
 @Entity
 @Component
 @Table(name = "NFCTAG")
-public class NfcTag {
+public class NfcTag implements Comparable<NfcTag> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "NFCUIDHEX", nullable = false)
-    private String nfcUidHex;
+    @Column(name = "nfcId", nullable = false)
+    private String nfcId;
 
     @Column(name = "ISADMINTAG", nullable = false)
     private Boolean isAdminTag;
@@ -35,38 +35,11 @@ public class NfcTag {
             isAdminTag = false;
     }
 
-    @Override
-    public String toString() {
-        return "NfcTag{" +
-                "id=" + id +
-                ", nfcUidHex='" + nfcUidHex + '\'' +
-                ", isAdminTag=" + isAdminTag +
-                ", groupNumber=" + groupNumber +
-                '}';
-    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NfcTag nfcTag = (NfcTag) o;
-
-        if (getId() != null ? !getId().equals(nfcTag.getId()) : nfcTag.getId() != null) return false;
-        if (getNfcUidHex() != null ? !getNfcUidHex().equals(nfcTag.getNfcUidHex()) : nfcTag.getNfcUidHex() != null)
-            return false;
-        if (isAdminTag != null ? !isAdminTag.equals(nfcTag.isAdminTag) : nfcTag.isAdminTag != null) return false;
-        return getGroupNumber() != null ? getGroupNumber().equals(nfcTag.getGroupNumber()) : nfcTag.getGroupNumber() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getNfcUidHex() != null ? getNfcUidHex().hashCode() : 0);
-        result = 31 * result + (isAdminTag != null ? isAdminTag.hashCode() : 0);
-        result = 31 * result + (getGroupNumber() != null ? getGroupNumber().hashCode() : 0);
-        return result;
+    public int compareTo(NfcTag o) {
+        if(this.equals(o)) return 0;
+        return getId().compareTo(o.getId());
     }
 
     public Long getId() {
@@ -77,12 +50,12 @@ public class NfcTag {
         this.id = id;
     }
 
-    public String getNfcUidHex() {
-        return nfcUidHex;
+    public String getNfcId() {
+        return nfcId;
     }
 
-    public void setNfcUidHex(String nfcUidHex) {
-        this.nfcUidHex = nfcUidHex;
+    public void setNfcId(String nfcId) {
+        this.nfcId = nfcId;
     }
 
     public Boolean getAdminTag() {
@@ -99,5 +72,38 @@ public class NfcTag {
 
     public void setGroupNumber(Integer groupNumber) {
         this.groupNumber = groupNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NfcTag nfcTag = (NfcTag) o;
+
+        if (getId() != null ? !getId().equals(nfcTag.getId()) : nfcTag.getId() != null) return false;
+        if (getNfcId() != null ? !getNfcId().equals(nfcTag.getNfcId()) : nfcTag.getNfcId() != null) return false;
+        if (isAdminTag != null ? !isAdminTag.equals(nfcTag.isAdminTag) : nfcTag.isAdminTag != null) return false;
+        return getGroupNumber() != null ? getGroupNumber().equals(nfcTag.getGroupNumber()) : nfcTag.getGroupNumber() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getNfcId() != null ? getNfcId().hashCode() : 0);
+        result = 31 * result + (isAdminTag != null ? isAdminTag.hashCode() : 0);
+        result = 31 * result + (getGroupNumber() != null ? getGroupNumber().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "NfcTag{" +
+                "id=" + id +
+                ", nfcId='" + nfcId + '\'' +
+                ", isAdminTag=" + isAdminTag +
+                ", groupNumber=" + groupNumber +
+                '}';
     }
 }

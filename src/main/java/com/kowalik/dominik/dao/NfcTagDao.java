@@ -13,4 +13,5 @@ public interface NfcTagDao {
     void deleteNfcTag(NfcTag nfcTag);
     List<NfcTag> findAllNfcTag();
     Boolean ifNfcTagExists(NfcTag nfcTag);
+    List<NfcTag> findByIsAdminTag(Boolean isAdminTag);
 }

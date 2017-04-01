@@ -17,6 +17,12 @@ public class NfcTagDaoImpl extends AbstractDao<Long, NfcTag> implements NfcTagDa
         return getByKey(id);
     }
 
+    public List<NfcTag> findByIsAdminTag(Boolean isAdminTag){
+        Query query = getSession().createQuery("select NFCTAG from NfcTag NFCTAG where NFCTAG.isAdminTag = :isAdminTag");
+        query.setParameter("isAdminTag", isAdminTag);
+        return query.list();
+    }
+
     @Override
     public void saveNfcTag(NfcTag nfcTag) {
         persist(nfcTag);
@@ -24,8 +30,8 @@ public class NfcTagDaoImpl extends AbstractDao<Long, NfcTag> implements NfcTagDa
 
     @Override
     public void deleteNfcTag(NfcTag nfcTag) {
-        Query query = getSession().createQuery("delete from NfcTag where nfcUidHex = :nfcUidHex");
-        query.setParameter("nfcUidHex",nfcTag.getNfcUidHex());
+        Query query = getSession().createQuery("delete from NfcTag where id= :id");
+        query.setParameter("id",nfcTag.getId());
         query.executeUpdate();
     }
 
@@ -37,10 +43,9 @@ public class NfcTagDaoImpl extends AbstractDao<Long, NfcTag> implements NfcTagDa
 
     @Override
     public Boolean ifNfcTagExists(NfcTag nfcTag) {
-        String hql = "select NFCTAG from NfcTag NFCTAG where NFCTAG.nfcUidHex = :nfcUidHex";
-        Query query = getSession().createQuery(hql);
-        query.setParameter("nfcUidHex", nfcTag.getNfcUidHex());
+        Query query = getSession().createQuery("select NFCTAG from NfcTag NFCTAG where NFCTAG.id = :id");
+        query.setParameter("id", nfcTag.getId());
         Object object = query.uniqueResult();
-        return object == null ? false : true;
+        return object != null;
     }
 }

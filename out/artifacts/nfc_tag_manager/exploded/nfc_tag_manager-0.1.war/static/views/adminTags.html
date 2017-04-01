@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="col col-md-7"></div>
+    <div class="col col-md-5">
+        <div ng-init="visible=false" ng-click="visible = !visible" ng-repeat="tag in tags" class="card">
+            <div class="card-content">
+                <label>nfc tag identity: {{ tag.tagId }}</label>
+                <div ng-if="visible" class="card-action">
+                    <button ng-click="delete(tag.nfcId)" style="background-color: #f44336" class="btn col-md-offset-4"><i
+                            class="material-icons small left">delete</i>delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

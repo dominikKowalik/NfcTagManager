@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by dominik on 2017-03-14.
@@ -29,7 +30,14 @@ public class NfcTagController {
         nfcTagService.saveNfcTag(nfcTag);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
+   //if is admin variable is true following method returns all admin tags in other case it returns all non admin tags
+    @RequestMapping(path = "filter_by_is_admin/{isAdmin}" ,method = RequestMethod.GET)
+    public ResponseEntity<List<NfcTag>> getTagsFilteredByIsAdminTag(@PathVariable("isAdmin") Boolean isAdmin){
+        System.out.println("listAdminTags");
+        List<NfcTag> nfcTagList = nfcTagService.findByIsAdminTag(isAdmin);
+        if(nfcTagList.size() == 0) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(nfcTagList, HttpStatus.OK);
+    }
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
     public ResponseEntity<List<NfcTag>> listAllNfcTags() {
         List<NfcTag> nfcTagList = nfcTagService.findAllNfcTags();
@@ -38,9 +46,10 @@ public class NfcTagController {
         }
         return new ResponseEntity<>(nfcTagList, HttpStatus.OK);
     }
-
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<List<NfcTag>> deleteNfcTag(NfcTag nfcTag) {
+    @RequestMapping(method = RequestMethod.DELETE, path = "{id}")
+    public ResponseEntity<List<NfcTag>> deleteNfcTag(@PathVariable("id") long id) {
+        NfcTag nfcTag = nfcTagService.findById(id);
+        System.out.println(nfcTag);
         if (nfcTagService.ifNfcTagExists(nfcTag)) {
             nfcTagService.deleteNfcTag(nfcTag);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -52,12 +61,11 @@ public class NfcTagController {
     public ResponseEntity<NfcTag> getNfcTag(@PathVariable("id") Long id) {
         NfcTag nfcTag = nfcTagService.findById(id);
         System.out.println(id.toString());
-        System.out.println(nfcTag);
-        if (nfcTag == null) {
-            System.out.println("not found");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if  (Optional.ofNullable(nfcTag).isPresent()) {
+            System.out.println(nfcTag);
+            return new ResponseEntity<>(nfcTag, HttpStatus.OK);
         }
-        System.out.println("println");
-        return new ResponseEntity<>(nfcTag, HttpStatus.OK);
+        System.out.println("not found");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

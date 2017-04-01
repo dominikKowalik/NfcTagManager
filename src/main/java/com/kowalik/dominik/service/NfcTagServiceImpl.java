@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by dominik on 2017-03-14.
@@ -29,6 +31,7 @@ public class NfcTagServiceImpl implements NfcTagService {
         nfcTagDao.saveNfcTag(nfcTag);
     }
 
+
     /**
      * Because this method is running with transaction there is no need to call hibernate update explicitly
      *
@@ -37,11 +40,11 @@ public class NfcTagServiceImpl implements NfcTagService {
     @Override
     public void updateNfcTag(NfcTag nfcTag) {
         NfcTag nfcTag1 = nfcTagDao.findById(nfcTag.getId());
-        if (nfcTag != null) {
+        Optional.ofNullable(nfcTag1).ifPresent( a -> {
             nfcTag1.setAdminTag(nfcTag.getAdminTag());
             nfcTag1.setGroupNumber(nfcTag.getGroupNumber());
-            nfcTag1.setNfcUidHex(nfcTag.getNfcUidHex());
-        }
+            nfcTag1.setNfcId(nfcTag.getNfcId());
+        });
     }
 
     @Override
@@ -57,5 +60,23 @@ public class NfcTagServiceImpl implements NfcTagService {
     @Override
     public Boolean ifNfcTagExists(NfcTag nfcTag) {
         return nfcTagDao.ifNfcTagExists(nfcTag);
+    }
+
+    @Override
+    public Long numberOfTagsInGroup(Integer group) {
+        List<NfcTag> nfcTagList = nfcTagDao.findAllNfcTag();
+        return nfcTagList.stream().filter(a -> a.getGroupNumber().equals(group)).count();
+    }
+
+    @Override
+    public List<NfcTag> tagsFromSpecifiedGroup(Integer group){
+        List<NfcTag> nfcTagList = nfcTagDao.findAllNfcTag();
+        return nfcTagList.stream().filter(a -> a.getGroupNumber().equals(group)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<NfcTag> findByIsAdminTag(Boolean isAdminTag) {
+        List<NfcTag> nfcTagList = nfcTagDao.findByIsAdminTag(isAdminTag);
+        return nfcTagList;
     }
 }
