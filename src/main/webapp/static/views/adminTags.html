@@ -1,15 +1,35 @@
 <div class="container-fluid">
-    <div class="col col-md-7"></div>
-    <div class="col col-md-5">
-        <div ng-init="visible=false" ng-click="visible = !visible" ng-repeat="tag in tags" class="card">
-            <div class="card-content">
-                <label>nfc tag identity: {{ tag.nfcId }}</label>
-                <div ng-if="visible" class="card-action">
-                    <button ng-click="delete(tag.nfcId)" style="background-color: #f44336" class="btn col-md-offset-4"><i
-                            class="material-icons small left">delete</i>delete
-                    </button>
-                </div>
+    <div class="col col-md-12">
+        <div class="panel panel-default" ng-init="visible=false" ng-click="visible = !visible" ng-repeat="nfcTag in tags">
+          <row>
+            <div class="panel-body">
+                <row>
+                    <div class="col col-md-4">
+                        <label>imie: {{ nfcTag.tagOwner.name }}</label>
+                    </div>
+                    <div class="col col-md-4">
+                        <label>nazwisko: {{ nfcTag.tagOwner.lastname }}</label>
+                    </div>
+                    <div class="col col-md-4">
+                        <label>firma: {{ nfcTag.tagOwner.companyName }}</label>
+                    </div>
+                </row>
+                <br>
+                <row>
+                    <div class="col col-md-4">
+                        <label>numer telefonu: {{ nfcTag.tagOwner.phoneNumber }}</label>
+                    </div>
+                    <div class="col col-md-4">
+                        <label>numer grupy: {{ nfcTag.groupNumber }}</label>
+                    </div>
+                </row>
+                <!--<div ng-if="visible" class="card-action">-->
+                    <!--<button ng-click="delete(tag.nfcId)" style="background-color: #f44336" class="btn col-md-offset-5">-->
+                        <!--<i class="material-icons small left">delete</i>Usun Tag-->
+                    <!--</button>-->
+                <!--</div>-->
             </div>
+          </row>
         </div>
     </div>
 </div>

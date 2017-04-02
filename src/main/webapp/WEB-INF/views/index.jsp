@@ -18,6 +18,10 @@
     label {
         font-size: 2em;
     }
+
+    body{
+        background-color: #e1e1e1;
+    }
 </style>
 
 <div class="container-fluid">
@@ -38,13 +42,15 @@
     </nav>
 </div>
 
-
 <div ui-view/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
 <script src="<c:url value="/static/js/app.js"/>"></script>
 <script src="<c:url value="/static/js/service/NfcTagService.js"/>"></script>
+<script src="<c:url value="/static/js/service/TagOwnerService.js"/>"></script>
 <script src="<c:url value="/static/js/controllers/adminTagsController.js"/>"></script>
+<script src="<c:url value="/static/js/controllers/addAdminTagController.js"/>"></script>
+
 </body>
 </html>

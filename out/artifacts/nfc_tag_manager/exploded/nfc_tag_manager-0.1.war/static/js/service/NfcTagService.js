@@ -2,7 +2,7 @@
  * Created by dominik on 2017-03-20.
  */
 app.factory('NfcTagService', ['$http', function ($http) {
-    var path = 'http://localhost:8080/nfc_tag_manager-0.1.war/nfc_tag'
+    var path = 'http://localhost:8080/nfc_tag_manager-0.1.war/nfc_tag';
     return {
         'fetchTagFilteredByIsAdminTag': function (isAdmin) {
             return $http.get(path + '/filter_by_is_admin/' + isAdmin).then(function(payload){

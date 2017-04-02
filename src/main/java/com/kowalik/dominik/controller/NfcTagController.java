@@ -19,7 +19,6 @@ import java.util.Optional;
 public class NfcTagController {
     @Autowired
     NfcTagService nfcTagService;
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> createNfcTag(@RequestBody NfcTag nfcTag) {
         System.out.println("createNfcTag");
@@ -38,6 +37,7 @@ public class NfcTagController {
         if(nfcTagList.size() == 0) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(nfcTagList, HttpStatus.OK);
     }
+
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
     public ResponseEntity<List<NfcTag>> listAllNfcTags() {
         List<NfcTag> nfcTagList = nfcTagService.findAllNfcTags();
@@ -56,7 +56,6 @@ public class NfcTagController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
     @RequestMapping(method = RequestMethod.GET, value="{id}")
     public ResponseEntity<NfcTag> getNfcTag(@PathVariable("id") Long id) {
         NfcTag nfcTag = nfcTagService.findById(id);

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Component
 @Table(name = "NFCTAG")
 public class NfcTag implements Comparable<NfcTag> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -26,6 +27,10 @@ public class NfcTag implements Comparable<NfcTag> {
     @Column(name = "GROUPNUMBER", nullable = false)
     private Integer groupNumber;
 
+    @OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinColumn(name = "TAGOWNER")
+    private TagOwner tagOwner;
+
     /**
      * This method is invoked before persist the object, since I want to set isAdminTag on false by default
      */
@@ -34,7 +39,6 @@ public class NfcTag implements Comparable<NfcTag> {
         if(isAdminTag == null)
             isAdminTag = false;
     }
-
 
     @Override
     public int compareTo(NfcTag o) {
@@ -74,6 +78,14 @@ public class NfcTag implements Comparable<NfcTag> {
         this.groupNumber = groupNumber;
     }
 
+    public TagOwner getTagOwner() {
+        return tagOwner;
+    }
+
+    public void setTagOwner(TagOwner tagOwner) {
+        this.tagOwner = tagOwner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,7 +96,9 @@ public class NfcTag implements Comparable<NfcTag> {
         if (getId() != null ? !getId().equals(nfcTag.getId()) : nfcTag.getId() != null) return false;
         if (getNfcId() != null ? !getNfcId().equals(nfcTag.getNfcId()) : nfcTag.getNfcId() != null) return false;
         if (isAdminTag != null ? !isAdminTag.equals(nfcTag.isAdminTag) : nfcTag.isAdminTag != null) return false;
-        return getGroupNumber() != null ? getGroupNumber().equals(nfcTag.getGroupNumber()) : nfcTag.getGroupNumber() == null;
+        if (getGroupNumber() != null ? !getGroupNumber().equals(nfcTag.getGroupNumber()) : nfcTag.getGroupNumber() != null)
+            return false;
+        return getTagOwner() != null ? getTagOwner().equals(nfcTag.getTagOwner()) : nfcTag.getTagOwner() == null;
 
     }
 
@@ -94,6 +108,7 @@ public class NfcTag implements Comparable<NfcTag> {
         result = 31 * result + (getNfcId() != null ? getNfcId().hashCode() : 0);
         result = 31 * result + (isAdminTag != null ? isAdminTag.hashCode() : 0);
         result = 31 * result + (getGroupNumber() != null ? getGroupNumber().hashCode() : 0);
+        result = 31 * result + (getTagOwner() != null ? getTagOwner().hashCode() : 0);
         return result;
     }
 
@@ -104,6 +119,7 @@ public class NfcTag implements Comparable<NfcTag> {
                 ", nfcId='" + nfcId + '\'' +
                 ", isAdminTag=" + isAdminTag +
                 ", groupNumber=" + groupNumber +
+                ", tagOwner=" + tagOwner +
                 '}';
     }
 }
