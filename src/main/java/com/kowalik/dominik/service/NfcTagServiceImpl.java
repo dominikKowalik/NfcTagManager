@@ -41,7 +41,7 @@ public class NfcTagServiceImpl implements NfcTagService {
     public void updateNfcTag(NfcTag nfcTag) {
         NfcTag nfcTag1 = nfcTagDao.findById(nfcTag.getId());
         Optional.ofNullable(nfcTag1).ifPresent( a -> {
-            nfcTag1.setAdminTag(nfcTag.getAdminTag());
+            nfcTag1.setIsAdminTag(nfcTag.getIsAdminTag());
             nfcTag1.setGroupNumber(nfcTag.getGroupNumber());
             nfcTag1.setNfcId(nfcTag.getNfcId());
         });

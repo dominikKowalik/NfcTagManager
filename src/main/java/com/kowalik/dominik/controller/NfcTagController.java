@@ -19,7 +19,8 @@ import java.util.Optional;
 public class NfcTagController {
     @Autowired
     NfcTagService nfcTagService;
-    @RequestMapping(method = RequestMethod.POST)
+
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> createNfcTag(@RequestBody NfcTag nfcTag) {
         System.out.println("createNfcTag");
         System.out.println(nfcTag.toString());

@@ -1,19 +1,18 @@
-app.controller('adminTagsController', ['$scope', 'NfcTagService', 'TagOwnerService',
-    function ($scope, NfcTagService) {
+app.controller('adminTagsController', ['$scope', 'nfcTagService',
+    function ($scope, nfcTagService) {
         var fetchAllTags =
             function () {
                 var isAdminTag = true;
-                NfcTagService.fetchTagFilteredByIsAdminTag(isAdminTag).then(function (data) {
+                nfcTagService.fetchTagFilteredByIsAdminTag(isAdminTag).then(function (data) {
                     $scope.tags = data;
                 }, function () {
                     console.log('error');
                 })
             }
-
         $scope.delete = function (id) {
-            NfcTagService.delete(id).then(function (payload) {
+            nfcTagService.delete(id).then(function (payload) {
                 console.log('success');
-                fetchAll();
+                fetchAllTags();
             }, function (error) {
                 console.log('error');
             })

@@ -62,11 +62,11 @@ public class NfcTag implements Comparable<NfcTag> {
         this.nfcId = nfcId;
     }
 
-    public Boolean getAdminTag() {
+    public Boolean getIsAdminTag() {
         return isAdminTag;
     }
 
-    public void setAdminTag(Boolean adminTag) {
+    public void setIsAdminTag(Boolean adminTag) {
         isAdminTag = adminTag;
     }
 

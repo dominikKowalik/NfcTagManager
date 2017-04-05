@@ -1,7 +1,7 @@
 /**
  * Created by dominik on 2017-03-20.
  */
-app.factory('NfcTagService', ['$http', function ($http) {
+app.factory('nfcTagService', ['$http', function ($http) {
     var path = 'http://localhost:8080/nfc_tag_manager-0.1.war/nfc_tag';
     return {
         'fetchTagFilteredByIsAdminTag': function (isAdmin) {
@@ -30,6 +30,17 @@ app.factory('NfcTagService', ['$http', function ($http) {
                 console.log('successfully deleted');
             },function (errorPayload) {
                 console.log('error while deleted');
+            })
+        },
+
+        'put':function (nfcTag) {
+            console.log(nfcTag);
+            return $http.put(path, nfcTag).then(function(payload){
+                console.log('nfc tag has been put');
+                console.log(payload.status);
+            }, function (errorPayload) {
+                console.log('error while putting nfcTag');
+                console.log(errorPayload.status);
             })
         }
     }

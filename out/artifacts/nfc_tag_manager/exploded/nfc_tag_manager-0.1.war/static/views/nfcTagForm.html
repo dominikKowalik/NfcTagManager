@@ -1,9 +1,9 @@
-<div  class="form-group">
+<div class="form-group">
     <label class="control-label col-md-1" for="tagId">
         Id:
     </label>
     <div class="col-md-10">
-        <input placeholder="Wprowadz identyfikator" class="form-control" id="tagId">
+        <input ng-model="tag.nfcId" placeholder="Wprowadz identyfikator" class="form-control" id="tagId">
     </div>
 </div>
 <div class="form-group">
@@ -11,6 +11,8 @@
         Grupa:
     </label>
     <div class="col-md-10">
-        <input placeholder="Wprowadz numer grupy" class="form-control" id="groupNumber">
+        <input ng-model="tag.groupNumber" placeholder="Wprowadz numer grupy" class="form-control" id="groupNumber">
     </div>
 </div>
+
+
