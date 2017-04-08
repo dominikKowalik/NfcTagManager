@@ -6,19 +6,15 @@ import java.util.Set;
  * Created by dominik on 2017-03-24.
  */
 
-
 public class PageContent implements Comparable<PageContent> {
 
     private Long id;
 
     private String header;
 
-
     private String title;
 
-
     private String text;
-
 
     private Set<String> photos;
 

@@ -3,20 +3,23 @@
  */
 app.controller('addAdminTagController', ['$scope', '$rootScope', '$location', 'nfcTagService', function ($scope, $rootScope
     , $location, nfcTagService) {
-
     $scope.clicked = false;
     $location.url('/add_admin_tag/nfc_tag_form');
 
     function NfcTag() {
         this.nfcId = '';
-        this.groupNumber = '';
         this.isAdminTag = true;
 
         this.tagOwner = {
-            name : '',
+            name: '',
             lastname: '',
             companyName: '',
             phoneNumber: ''
+        }
+
+        this.bunch = {
+            number: '',
+            enableApplicationSet: []
         }
     }
 

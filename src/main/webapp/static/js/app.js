@@ -6,13 +6,14 @@ var app = angular.module('app', ['ui.router']).config(['$stateProvider', functio
         {
             url: '/admin_tags',
             templateUrl: 'static/views/adminTags.html',
+
             controller: 'adminTagsController'
         }
     ).state('addAdminTag',
         {
-            abstract:true,
+            abstract: true,
             url: '/add_admin_tag',
-            templateUrl: 'static/views/addAdminTag.html',
+            templateUrl: 'static/views/addAdminTag.html'
         }
     ).state('addAdminTag.nfcTagForm',
         {
@@ -22,12 +23,13 @@ var app = angular.module('app', ['ui.router']).config(['$stateProvider', functio
     ).state('addAdminTag.tagOwnerForm',
         {
             url: '/tag_owner_form',
-            templateUrl: 'static/views/tagOwnerForm.html',
+            templateUrl: 'static/views/tagOwnerForm.html'
         }
-    )
-
-
-
+    ).state('pageContentForm',
+        {
+          url: '/page_content_form',
+          templateUrl: 'static/views/pageContentForm.html'
+        })
 }])
 
 

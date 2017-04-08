@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class TagOwner implements Comparable<TagOwner> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public Long id;
 

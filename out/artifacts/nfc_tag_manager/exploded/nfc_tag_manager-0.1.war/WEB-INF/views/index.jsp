@@ -37,6 +37,9 @@
                         <li><a ui-sref="adminTags">Wszystkie Znaczniki</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a ui-sref="pageContentForm">Twitter</a>
+                </li>
             </ul>
         </div>
     </nav>
